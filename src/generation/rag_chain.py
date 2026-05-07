@@ -1,9 +1,9 @@
 """RAG chain module — kết hợp retrieval và generation."""
 
 import os
-from langchain.prompts import ChatPromptTemplate
-from langchain.schema.runnable import RunnablePassthrough
-from langchain_community.vectorstores import Chroma
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_chroma import Chroma
 
 
 SYSTEM_PROMPT = """Bạn là trợ lý AI thông minh. Trả lời câu hỏi DỰA TRÊN context
@@ -37,6 +37,7 @@ def get_llm(provider: str | None = None):
     """
     provider = provider or os.getenv("LLM_PROVIDER", "anthropic")
     model_override = os.getenv("LLM_MODEL")
+    print(f"[get_llm] provider={provider!r}, model_override={model_override!r}")
 
     if provider == "anthropic":
         from langchain_anthropic import ChatAnthropic
@@ -55,6 +56,7 @@ def get_llm(provider: str | None = None):
         return ChatGoogleGenerativeAI(
             model=model_override or "gemini-2.0-flash",
             temperature=0,
+            max_retries=0,
         )
     elif provider == "groq":
         from langchain_groq import ChatGroq
@@ -120,6 +122,8 @@ def create_rag_chain(vector_store: Chroma, k: int = 4):
 def ask(vector_store: Chroma, question: str, k: int = 4) -> dict:
     """High-level function: ask a question and get answer + sources.
 
+    Single retrieval call — sources are reused for both display and LLM context.
+
     Args:
         vector_store: ChromaDB vector store.
         question: User question in natural language.
@@ -131,8 +135,19 @@ def ask(vector_store: Chroma, question: str, k: int = 4) -> dict:
     retriever = vector_store.as_retriever(search_kwargs={"k": k})
     sources = retriever.invoke(question)
 
-    chain = create_rag_chain(vector_store, k=k)
-    response = chain.invoke(question)
+    print(f"\n[ask] Question: {question}")
+    print(f"[ask] Retrieved {len(sources)} chunks:")
+    for i, doc in enumerate(sources, 1):
+        preview = doc.page_content[:150].replace("\n", " ")
+        src = doc.metadata.get("source", "?")
+        page = doc.metadata.get("page", "?")
+        print(f"  [{i}] {src} p.{page}: {preview}...")
+
+    context = format_docs(sources)
+    llm = get_llm()
+    chain = PROMPT | llm
+
+    response = chain.invoke({"context": context, "question": question})
     answer = response.content if hasattr(response, "content") else str(response)
 
     return {

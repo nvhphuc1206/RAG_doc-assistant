@@ -7,6 +7,16 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)
 ![Docker](https://img.shields.io/badge/docker-ready-blue.svg)
 
+<p align="center">
+  <img src="Image/Dashboard.png" width="900" alt="Dashboard">
+</p>
+
+> Deployment testing
+
+<p align="center">
+  <img src="Image/Deployment_testing.png" width="900" alt="Deployment testing">
+</p>
+
 ---
 
 ## Mục lục

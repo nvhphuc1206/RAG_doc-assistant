@@ -1,7 +1,7 @@
 """Tests for vector store module."""
 
 import pytest
-from langchain.schema import Document
+from langchain_core.documents import Document
 from src.embeddings.store import create_vector_store, load_vector_store
 
 

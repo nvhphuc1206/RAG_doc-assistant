@@ -3,7 +3,7 @@
 import pytest
 from unittest.mock import MagicMock, patch
 from src.generation.rag_chain import format_docs, ask
-from langchain.schema import Document
+from langchain_core.documents import Document
 
 
 def test_format_docs():

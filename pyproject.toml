@@ -9,12 +9,16 @@ description = "Chat with your documents using RAG"
 requires-python = ">=3.11"
 dependencies = [
     "langchain>=0.3",
+    "langchain-core>=0.3",
     "langchain-community>=0.3",
+    "langchain-text-splitters>=0.3",
     "langchain-anthropic>=0.3",
     "langchain-huggingface>=0.1",
     "langchain-chroma>=0.1",
     "chromadb>=0.5",
     "sentence-transformers>=2.7",
+    "torch>=2.0",
+    "torchvision>=0.15",
     "pypdf>=4.0",
     "python-docx>=1.1",
     "unstructured>=0.14",

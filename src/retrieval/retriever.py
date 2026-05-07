@@ -1,7 +1,7 @@
 """Retrieval module — tìm kiếm vector similarity từ ChromaDB."""
 
-from langchain_community.vectorstores import Chroma
-from langchain.schema import Document
+from langchain_chroma import Chroma
+from langchain_core.documents import Document
 
 
 def get_retriever(vector_store: Chroma, k: int = 4, search_type: str = "similarity"):

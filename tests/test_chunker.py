@@ -1,6 +1,6 @@
 """Tests for text chunking module."""
 
-from langchain.schema import Document
+from langchain_core.documents import Document
 from src.ingestion.chunker import chunk_documents
 
 
