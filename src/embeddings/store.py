@@ -1,4 +1,4 @@
-"""Vector store module — embedding và lưu trữ vectors vào ChromaDB."""
+"""Vector store module — embeds documents and persists vectors to ChromaDB."""
 
 import os
 from langchain_huggingface import HuggingFaceEmbeddings

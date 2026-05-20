@@ -78,7 +78,7 @@ chroma/
 data/uploads/*
 !data/uploads/.gitkeep
 
-# Optional: bỏ comment nếu data/samples chứa file riêng tư
+# Optional: uncomment if data/samples contains private files
 # data/samples/*
 # !data/samples/.gitkeep
 
@@ -114,7 +114,7 @@ Thumbs.db
 desktop.ini
 
 # =============================================================================
-# Docker volumes (nếu mount local)
+# Docker volumes (when mounted locally)
 # =============================================================================
 docker-volumes/
 

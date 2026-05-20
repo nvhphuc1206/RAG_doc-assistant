@@ -1,4 +1,4 @@
-"""Document loading module — hỗ trợ PDF, DOCX, TXT, Markdown."""
+"""Document loading module — supports PDF, DOCX, TXT, Markdown."""
 
 from pathlib import Path
 from langchain_community.document_loaders import (

@@ -1,4 +1,4 @@
-"""Conversation memory — cho phép hỏi đáp nhiều lượt."""
+"""Conversation memory — enables multi-turn Q&A."""
 
 from langchain.memory import ConversationBufferWindowMemory
 from langchain.chains import ConversationalRetrievalChain

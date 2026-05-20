@@ -1,4 +1,4 @@
-"""RAG chain module — kết hợp retrieval và generation."""
+"""RAG chain module — combines retrieval and generation."""
 
 import os
 from langchain_core.prompts import ChatPromptTemplate
@@ -6,14 +6,14 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_chroma import Chroma
 
 
-SYSTEM_PROMPT = """Bạn là trợ lý AI thông minh. Trả lời câu hỏi DỰA TRÊN context
-được cung cấp bên dưới. Tuân thủ các quy tắc sau:
+SYSTEM_PROMPT = """You are an intelligent AI assistant. Answer the question BASED ONLY
+on the context provided below. Follow these rules:
 
-1. Chỉ trả lời dựa trên thông tin trong context
-2. Trích dẫn nguồn (tên file, trang) khi trả lời
-3. Nếu không tìm thấy thông tin, nói rõ: "Tôi không tìm thấy thông tin này trong tài liệu được cung cấp."
-4. Trả lời bằng ngôn ngữ của câu hỏi
-5. Trả lời ngắn gọn, đúng trọng tâm
+1. Answer only using information from the context
+2. Cite sources (file name, page) when answering
+3. If the information is not found, say clearly: "I could not find this information in the provided documents."
+4. Reply in the same language as the question
+5. Be concise and focused
 
 Context:
 {context}
@@ -89,7 +89,7 @@ def format_docs(docs) -> str:
         page = doc.metadata.get("page", "N/A")
         chunk_idx = doc.metadata.get("chunk_index", "?")
         parts.append(
-            f"[Nguồn {i} | File: {source} | Trang: {page} | Chunk: {chunk_idx}]\n"
+            f"[Source {i} | File: {source} | Page: {page} | Chunk: {chunk_idx}]\n"
             f"{doc.page_content}"
         )
     return "\n\n---\n\n".join(parts)

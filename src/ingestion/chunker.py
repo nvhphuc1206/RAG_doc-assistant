@@ -1,4 +1,4 @@
-"""Text chunking module — tách document thành các đoạn nhỏ có overlap."""
+"""Text chunking module — splits documents into smaller overlapping chunks."""
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document

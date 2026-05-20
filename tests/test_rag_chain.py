@@ -20,7 +20,7 @@ def test_format_docs():
     ]
     result = format_docs(docs)
 
-    assert "Nguồn 1" in result
+    assert "Source 1" in result
     assert "guide.pdf" in result
     assert "LangChain" in result
     assert "ChromaDB" in result
